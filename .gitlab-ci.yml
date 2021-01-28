@@ -4,5 +4,11 @@ default:
 build-job:
     stage: build
     script:
-        - echo "Hello, GitLab"
+        - yarn
+        - yarn build
+    
+deploy-job:
+    stage: deploy
+    script: 
+        - echo "Deploy"
 
