@@ -11,14 +11,9 @@ pipeline {
                 sh 'docker-compose build'
             }
         }
-        stage('Deploy') {
-            steps {
-                sh 'docker-compose up -d'
-            }
-        }
         stage('Security') {
             steps {
-
+                sh'trivi filesystem -f json -o trivi-fs.json .'
                 sh 'trivy image --format json --output trivy-results.json hello-brunch'
                 
             }
@@ -26,11 +21,18 @@ pipeline {
                 always {
                     recordIssues(
                             enabledForFailure: true,
-                            tools: [trivy( pattern: 'trivy-results.json')]
+                            aggregatingResults:true,
+                            tools: [trivy( pattern: 'trivy-*.json')]
                     )
                 }
             }
         }
+        stage('Deploy') {
+            steps {
+                sh 'docker-compose up -d'
+            }
+        }
+        
 
     }
 }
