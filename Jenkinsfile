@@ -16,5 +16,21 @@ pipeline {
                 sh 'docker-compose up -d'
             }
         }
+        stage('Security') {
+            steps {
+
+                sh 'trivy image --format json --output trivy-results.json hello-brunch'
+                
+            }
+            post {
+                always {
+                    recordIssues(
+                            enabledForFailure: true,
+                            tools: [trivy( pattern: 'trivy-results.json')]
+                    )
+                }
+            }
+        }
+
     }
 }
