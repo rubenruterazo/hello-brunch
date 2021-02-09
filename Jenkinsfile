@@ -13,7 +13,7 @@ pipeline {
         }
         stage('Security') {
             steps {
-                sh'trivi filesystem -f json -o trivi-fs.json .'
+                sh 'trivi filesystem -f json -o trivi-fs.json .'
                 sh 'trivy image --format json --output trivy-results.json hello-brunch'
                 
             }
