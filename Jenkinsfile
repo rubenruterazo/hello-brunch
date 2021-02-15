@@ -14,7 +14,7 @@ pipeline {
         
         stage('Publish') {
             steps {
-                withDockerRegistry([credentialsId:"gitlab-registry", url:"http://10.250.15.2:5050"]){
+                withDockerRegistry([credentialsId:"gitlab-registry", url:"https://10.250.15.2:2224"]){
                         sh 'echo ${BUILD_NUMBER}'
                         sh 'docker tag hello-brunch:latest 10.250.15.2:5050/root/hello-brunch:BUILD-1.${BUILD_NUMBER}'
                         sh 'docker push 10.250.15.2:5050/root/hello-brunch:BUILD-1.${BUILD_NUMBER}'
