@@ -34,6 +34,7 @@ pipeline {
         }
         stage('Remote deploy'){
             steps{
+                sh 'ls'
                 sshagent(['deploy-key']) {
                     sh 'ls'
                     sh 'ssh -l deploy 10.250.15.2'
