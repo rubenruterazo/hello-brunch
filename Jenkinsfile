@@ -37,7 +37,7 @@ pipeline {
                 sh 'ls'
                 sshagent(['deploy-key']) {
                     sh 'ssh-add -l'
-                    sh 'ssh deploy@10.250.15.2'
+                    sh 'ssh -tt deploy@10.250.15.2'
                     sh 'ls'
                     sh 'docker pull 10.250.15.2:5050/root/hello-brunch:latest'
                 }
