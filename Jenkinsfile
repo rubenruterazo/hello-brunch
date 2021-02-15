@@ -37,9 +37,9 @@ pipeline {
                 sh 'ls'
                 sshagent(['deploy-key']) {
                     sh 'ssh-add -l'
-                    sh 'ssh -t -o "StrictHostKeyChecking no" deploy@10.250.15.2 '
+                    sh 'ssh -t -o "StrictHostKeyChecking no" deploy@10.250.15.2'
                     sh 'ls'
-                    sh ''docker-compose pull && docker-compose up -d''
+                    sh 'docker-compose pull && docker-compose up -d'
                 }
             }
         }
