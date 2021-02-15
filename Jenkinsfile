@@ -37,7 +37,7 @@ pipeline {
                 sh 'ls'
                 sshagent(['deploy-key']) {
                     sh 'ls'
-                    sh 'ssh -l deploy 10.250.15.2'
+                    sh 'ssh deploy@10.250.15.2'
                     sh 'ls'
                 }
             }
