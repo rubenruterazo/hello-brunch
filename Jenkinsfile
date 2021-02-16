@@ -38,8 +38,7 @@ pipeline {
         stage('Remote deploy'){
             steps{
                 sshagent(['deploy-key']) {
-                    sh 'ssh -t -o "StrictHostKeyChecking no" deploy@10.250.15.2 "docker-compose pull && docker-compose up -d"'
-
+                    sh 'ssh -t -o "StrictHostKeyChecking no" deploy@10.250.15.2 "docker-compose pull && docker swarm init && docker stack up -c docker-compose.yml brunch"'
                 }
             }
         }
